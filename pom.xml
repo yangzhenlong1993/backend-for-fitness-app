@@ -135,8 +135,6 @@
 
 	</dependencies>
 
-
-
 	<build>
 		<finalName>mobile_project</finalName>
 	</build>

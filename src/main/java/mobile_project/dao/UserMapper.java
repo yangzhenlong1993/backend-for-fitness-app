@@ -1,28 +1,15 @@
 package mobile_project.dao;
 
-import java.util.List;
 import mobile_project.bean.User;
-import mobile_project.bean.UserExample;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-    long countByExample(UserExample example);
-
-    int deleteByExample(UserExample example);
-
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Integer userid);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    List<User> selectByExample(UserExample example);
-
-    User selectByPrimaryKey(Integer userId);
-
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
-
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+    User selectByPrimaryKey(Integer userid);
 
     int updateByPrimaryKeySelective(User record);
 

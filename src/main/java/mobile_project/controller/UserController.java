@@ -2,6 +2,7 @@ package mobile_project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,14 +29,21 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	@ResponseBody
-	public Msg getUser(@RequestParam(value = "userId") Integer userId,
+	public Msg logInCheck(@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password) {
 
-		User user = userService.getUser(userId);
+		return Msg.success().add("userInfo", 1);
 
-		return Msg.success().add("userInfo", user);
+	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public Msg signUpCheck(@RequestBody User user) {
+		System.out.println(user.getUsername());
+		
+		userService.insertUser(user);
+		return null;
 
 	}
 }

@@ -17,4 +17,16 @@ public class UserService {
 		return userMapper.selectByPrimaryKey(userId);
 	}
 
+	public int updateUser(User user) {
+		userMapper.updateByPrimaryKey(user);
+		
+		return 0;
+		
+	}
+
+	public int insertUser(User user) {
+		userMapper.insert(user);
+		
+		return 0;
+	}
 }
