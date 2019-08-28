@@ -2,6 +2,8 @@ package mobile_project.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User {
     private String username;
 
@@ -9,6 +11,7 @@ public class User {
 
     private Integer gender;
 
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+10")
     private Date birthday;
 
     private Integer height;

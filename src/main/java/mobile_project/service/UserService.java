@@ -1,10 +1,6 @@
 package mobile_project.service;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import mobile_project.bean.User;
 import mobile_project.dao.UserMapper;
@@ -21,6 +17,7 @@ public class UserService {
 		return userMapper.selectByPrimaryKey(username);
 	}
 
+	//update user info
 	public int updateUser(User user) {
 		userMapper.updateByPrimaryKey(user);
 
@@ -28,6 +25,7 @@ public class UserService {
 
 	}
 
+	//insert user info, check if the user exists
 	public int insertUser(User user) {
 
 		if (this.getUser(user.getUsername()) != null) {
