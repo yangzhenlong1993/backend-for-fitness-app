@@ -17,17 +17,10 @@ public class Msg {
 	// 要返回给浏览器的数据
 	private Map<String, Object> extend = new HashMap<String, Object>();
 
-	public static Msg success() {
+	public static Msg prepare(int code, String msg) {
 		Msg result = new Msg();
-		result.setCode(100);
-		result.setMsg("Login Successful");
-		return result;
-	}
-
-	public static Msg fail() {
-		Msg result = new Msg();
-		result.setCode(200);
-		result.setMsg("Login Failed");
+		result.setCode(code);
+		result.setMsg(msg);
 		return result;
 	}
 

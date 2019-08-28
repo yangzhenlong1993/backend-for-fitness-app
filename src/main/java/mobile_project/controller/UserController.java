@@ -22,28 +22,29 @@ import mobile_project.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
+	private static final String LOG_IN = "login";
+	private static final String SIGN_UP = "signup";
 
 	/**
-	 * 查询用户数据 官方推荐方法
+	 * 查询用户数据
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = LOG_IN, method = RequestMethod.GET)
 	@ResponseBody
-	public Msg logInCheck(@RequestParam(value = "username") String username,
-			@RequestParam(value = "password") String password) {
-
-		return Msg.success().add("userInfo", 1);
+	public Msg logInCheck(@RequestParam(value = "username") String username) {
+		User result = userService.getUser(username);
+		return Msg.prepare(100, LOG_IN).add("user_info",result);
 
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@RequestMapping(value = SIGN_UP, method = RequestMethod.GET)
+	@ResponseBody
 	public Msg signUpCheck(@RequestBody User user) {
-		System.out.println(user.getUsername());
-		
-		userService.insertUser(user);
-		return null;
+		int result = userService.insertUser(user);
+
+		return Msg.prepare(result, SIGN_UP);
 
 	}
 }
