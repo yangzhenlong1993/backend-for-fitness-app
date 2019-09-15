@@ -52,7 +52,7 @@ public class MVCTest {
 	public void testGetUser() throws Exception {
 		
 		User user = new User();
-		user.setUsername("yusdafhong");
+		user.setUsername("dfsg");
 		user.setPassword("123");
 		user.setGender(1);
 		user.setBirthday(new Date());
@@ -66,6 +66,7 @@ public class MVCTest {
 		// 模拟请求拿到返回值
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/login").param("username", user.getUsername())).andReturn();
 		// 请求成功后
+		//MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/signup").contentType(MediaType.APPLICATION_JSON).content(requestJson)).andReturn();
 		System.out.println(result.getResponse().getContentAsString());
 		
 

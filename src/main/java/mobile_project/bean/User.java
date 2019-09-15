@@ -5,18 +5,28 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class User {
+    private Integer userid;
+
     private String username;
 
     private String password;
 
     private Integer gender;
 
-    @JsonFormat(pattern="yyyy-MM-dd", timezone = "GMT+10")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+10")
     private Date birthday;
 
     private Integer height;
 
     private Integer weight;
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
+    }
 
     public String getUsername() {
         return username;

@@ -35,11 +35,20 @@ public class UserController {
 	@ResponseBody
 	public Msg logInCheck(@RequestParam(value = "username") String username) {
 		User result = userService.getUser(username);
-		return Msg.prepare(100, LOG_IN).add("user_info",result);
+		if (result != null) {
+			return Msg.prepare(Msg.SELECT_SUCCESS, LOG_IN).add("user_info", result);
+		} else {
+			return Msg.prepare(Msg.SELECT_FAIL, LOG_IN);
+		}
 
 	}
 
-	@RequestMapping(value = SIGN_UP, method = RequestMethod.GET)
+	/**
+	 * 插入用户数据
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = SIGN_UP, method = RequestMethod.PUT)
 	@ResponseBody
 	public Msg signUpCheck(@RequestBody User user) {
 		int result = userService.insertUser(user);
