@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mobile_project.dao.ParticipantsMapper">
+  <resultMap id="BaseResultMap" type="mobile_project.bean.Participants">
+    <result column="eventId" jdbcType="INTEGER" property="eventid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+  <insert id="insert" parameterType="mobile_project.bean.Participants">
+    insert into participants (eventId, userId, role, 
+      count)
+    values (#{eventid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, 
+      #{count,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="mobile_project.bean.Participants">
+    insert into participants
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventid != null">
+        eventId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventid != null">
+        #{eventid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
