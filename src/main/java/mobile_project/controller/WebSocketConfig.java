@@ -14,7 +14,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	private  UserWebSocketHandler userWebSocketHandler;
 	private static final String LINK_URI = "websocket";
 	//add websocket handler, add handshake interceptor, interceptor first, after handler
-	
+	public static final String UID = "WEBSOCKET_USER_ID";
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
 

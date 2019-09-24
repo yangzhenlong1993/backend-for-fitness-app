@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import mobile_project.bean.Msg;
 import mobile_project.bean.User;
 
 /**
@@ -50,23 +51,28 @@ public class MVCTest {
 
 	@Test
 	public void testGetUser() throws Exception {
+		Msg msg = new Msg();
 		
 		User user = new User();
-		user.setUsername("dfsg");
-		user.setPassword("123");
+		user.setUsername("zhenlong");
+		user.setPassword("123456");
 		user.setGender(1);
 		user.setBirthday(new Date());
 		user.setHeight(123);
 		user.setWeight(123);
+		msg.setOperation("login");
+		msg.setUserInfo(user);
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-		String requestJson = ow.writeValueAsString(user);
-		mapper.writeValueAsString(user);
+		String requestJson = ow.writeValueAsString(msg);
+		mapper.writeValueAsString(msg);
+		System.out.println(requestJson);
+		
+		
 		
 		// 模拟请求拿到返回值
-		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/login").param("username", user.getUsername())).andReturn();
 		// 请求成功后
-		//MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/signup").contentType(MediaType.APPLICATION_JSON).content(requestJson)).andReturn();
+		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/login").contentType(MediaType.APPLICATION_JSON).content(requestJson)).andReturn();
 		System.out.println(result.getResponse().getContentAsString());
 		
 

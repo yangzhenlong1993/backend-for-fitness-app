@@ -7,6 +7,7 @@ public class Participants {
 
     private String role;
 
+    //出席次数
     private Integer count;
 
     public Integer getEventid() {

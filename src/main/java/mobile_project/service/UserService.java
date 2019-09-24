@@ -14,14 +14,14 @@ public class UserService {
 	private UserMapper userMapper;
 
 	public User getUser(String username) {
-		//select user info
+		// select user info
 		return userMapper.selectByUsername(username);
 	}
 
 	// update user info
 	public int updateUser(User user) {
 		int result = userMapper.updateByPrimaryKey(user);
-
+		System.out.println(result);
 		return Msg.UPDATE_SUCCESS;
 
 	}
@@ -34,6 +34,30 @@ public class UserService {
 		} else {
 			userMapper.insert(user);
 			return Msg.INSERT_SUCCESS;
+		}
+
+	}
+
+	// 校验用户登陆信息
+	public Msg checkUser(String username, String password) {
+		Msg msg = new Msg();
+		msg.setOperation("login");
+		User user = this.getUser(username);
+		if (user != null) {
+			if (user.getPassword().equals(password)) {
+				msg.setCode(Msg.SELECT_SUCCESS);
+
+				msg.setUserInfo(getUser(username));
+				return msg;
+			} else {
+				msg.setCode(Msg.SELECT_FAIL);
+
+				return msg;
+			}
+		} else {
+			msg.setCode(Msg.SELECT_FAIL);
+
+			return msg;
 		}
 
 	}

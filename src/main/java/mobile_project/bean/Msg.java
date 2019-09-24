@@ -1,7 +1,6 @@
 package mobile_project.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * 通用的返回数据类
@@ -10,12 +9,20 @@ import java.util.Map;
  *
  */
 public class Msg {
-	// 状态码 成功-100 失败-200
+
 	private int code;
 	// 提示信息
-	private String msg;
-	// 要返回给浏览器的数据
-	private Map<String, Object> extend = new HashMap<String, Object>();
+	private String operation;
+	// 需要的操作
+	private int fromId;
+	// 发信用户
+	private int toId;
+	// 收信用户
+	private User userInfo = null;
+	
+	private Event event = null;
+	
+	private List<Event> events = null;
 
 	public static final int INSERT_SUCCESS = 101;
 	public static final int UPDATE_SUCCESS = 102;
@@ -26,17 +33,6 @@ public class Msg {
 	public static final int DELETE_FAIL = 203;
 	public static final int SELECT_FAIL = 204;
 
-	public static Msg prepare(int code, String msg) {
-		Msg result = new Msg();
-		result.setCode(code);
-		result.setMsg(msg);
-		return result;
-	}
-
-	public Msg add(String key, Object value) {
-		this.getExtend().put(key, value);
-		return this;
-	}
 
 	public int getCode() {
 		return code;
@@ -46,20 +42,54 @@ public class Msg {
 		this.code = code;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getOperation() {
+		return operation;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 
-	public Map<String, Object> getExtend() {
-		return extend;
+	public int getFromId() {
+		return fromId;
 	}
 
-	public void setExtend(Map<String, Object> extend) {
-		this.extend = extend;
+	public void setFromId(int fromId) {
+		this.fromId = fromId;
 	}
+
+	public int getToId() {
+		return toId;
+	}
+
+	public void setToId(int toId) {
+		this.toId = toId;
+	}
+
+	public User getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(User userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+
 
 }

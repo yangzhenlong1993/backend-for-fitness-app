@@ -11,7 +11,7 @@
 		</commentGenerator>
 		<!-- 数据库连接信息 -->
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/mobile?serverTimezone=GMT%2B8&amp;useSSL=false"
+			connectionURL="jdbc:mysql://localhost:3306/mobile?serverTimezone=GMT%2B8&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"
 			userId="root" password="123456">
 			<property name="nullCatalogMeansCurrent" value="true" />
 		</jdbcConnection>
@@ -43,13 +43,13 @@
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
-		<table tableName="event" domainObjectName="Event"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>
-		<table tableName="participants" domainObjectName="Participants"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false"></table>
+		<!-- <table tableName="event" domainObjectName="Event" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table> -->
+		<!-- <table tableName="participants" domainObjectName="Participants" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table> <table tableName="friends" domainObjectName="Friends" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false"></table> -->
 	</context>
 </generatorConfiguration>

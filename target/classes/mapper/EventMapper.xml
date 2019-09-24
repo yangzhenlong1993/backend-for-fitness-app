@@ -1,128 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mobile_project.dao.EventMapper">
-  <resultMap id="BaseResultMap" type="mobile_project.bean.Event">
-    <id column="eventId" jdbcType="INTEGER" property="eventid" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="longtitude" jdbcType="DOUBLE" property="longtitude" />
-    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
-    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
-    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
-    <result column="interval" jdbcType="INTEGER" property="interval" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    eventId, title, longtitude, latitude, startTime, endTime, interval, category
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from event
-    where eventId = #{eventid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from event
-    where eventId = #{eventid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="mobile_project.bean.Event">
-    insert into event (eventId, title, longtitude, 
-      latitude, startTime, endTime, 
-      interval, category)
-    values (#{eventid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{longtitude,jdbcType=DOUBLE}, 
-      #{latitude,jdbcType=DOUBLE}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
-      #{interval,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="mobile_project.bean.Event">
-    insert into event
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="eventid != null">
-        eventId,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="longtitude != null">
-        longtitude,
-      </if>
-      <if test="latitude != null">
-        latitude,
-      </if>
-      <if test="starttime != null">
-        startTime,
-      </if>
-      <if test="endtime != null">
-        endTime,
-      </if>
-      <if test="interval != null">
-        interval,
-      </if>
-      <if test="category != null">
-        category,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="eventid != null">
-        #{eventid,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="longtitude != null">
-        #{longtitude,jdbcType=DOUBLE},
-      </if>
-      <if test="latitude != null">
-        #{latitude,jdbcType=DOUBLE},
-      </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endtime != null">
-        #{endtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="interval != null">
-        #{interval,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        #{category,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="mobile_project.bean.Event">
-    update event
-    <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="longtitude != null">
-        longtitude = #{longtitude,jdbcType=DOUBLE},
-      </if>
-      <if test="latitude != null">
-        latitude = #{latitude,jdbcType=DOUBLE},
-      </if>
-      <if test="starttime != null">
-        startTime = #{starttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endtime != null">
-        endTime = #{endtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="interval != null">
-        interval = #{interval,jdbcType=INTEGER},
-      </if>
-      <if test="category != null">
-        category = #{category,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where eventId = #{eventid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="mobile_project.bean.Event">
-    update event
-    set title = #{title,jdbcType=VARCHAR},
-      longtitude = #{longtitude,jdbcType=DOUBLE},
-      latitude = #{latitude,jdbcType=DOUBLE},
-      startTime = #{starttime,jdbcType=TIMESTAMP},
-      endTime = #{endtime,jdbcType=TIMESTAMP},
-      interval = #{interval,jdbcType=INTEGER},
-      category = #{category,jdbcType=VARCHAR}
-    where eventId = #{eventid,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="mobile_project.bean.Event">
+		<id column="eventId" jdbcType="INTEGER" property="eventid" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="category" jdbcType="VARCHAR"
+			property="category" />
+		<result column="locationName" jdbcType="VARCHAR"
+			property="locationname" />
+		<result column="longtitude" jdbcType="DOUBLE"
+			property="longtitude" />
+		<result column="latitude" jdbcType="DOUBLE" property="latitude" />
+		<result column="startTime" jdbcType="TIMESTAMP"
+			property="starttime" />
+		<result column="eventInterval" jdbcType="INTEGER"
+			property="eventinterval" />
+		<result column="eventCount" jdbcType="INTEGER"
+			property="eventcount" />
+		<result column="doneOrNot" jdbcType="INTEGER"
+			property="doneornot" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		eventId, title, category, locationName, longtitude, latitude, startTime,
+		eventInterval,
+		eventCount, doneOrNot
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from event
+		where eventId = #{eventid,jdbcType=INTEGER}
+	</select>
+	<select id="selectByTitle" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from event
+		where title like "%"#{title,jdbcType = VARCHAR}"%"
+	</select>
+	<select id="selectAllEvents" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from event
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from event
+		where eventId = #{eventid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="mobile_project.bean.Event">
+		insert into event (eventId, title, category,
+		locationName, longtitude, latitude,
+		startTime, eventInterval, eventCount,
+		doneOrNot)
+		values (#{eventid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{category,jdbcType=VARCHAR},
+		#{locationname,jdbcType=VARCHAR}, #{longtitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE},
+		#{starttime,jdbcType=TIMESTAMP}, #{eventinterval,jdbcType=INTEGER},
+		#{eventcount,jdbcType=INTEGER},
+		#{doneornot,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="mobile_project.bean.Event">
+		insert into event
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="eventid != null">
+				eventId,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
+			<if test="locationname != null">
+				locationName,
+			</if>
+			<if test="longtitude != null">
+				longtitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="starttime != null">
+				startTime,
+			</if>
+			<if test="eventinterval != null">
+				eventInterval,
+			</if>
+			<if test="eventcount != null">
+				eventCount,
+			</if>
+			<if test="doneornot != null">
+				doneOrNot,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="eventid != null">
+				#{eventid,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="locationname != null">
+				#{locationname,jdbcType=VARCHAR},
+			</if>
+			<if test="longtitude != null">
+				#{longtitude,jdbcType=DOUBLE},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="starttime != null">
+				#{starttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="eventinterval != null">
+				#{eventinterval,jdbcType=INTEGER},
+			</if>
+			<if test="eventcount != null">
+				#{eventcount,jdbcType=INTEGER},
+			</if>
+			<if test="doneornot != null">
+				#{doneornot,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="mobile_project.bean.Event">
+		update event
+		<set>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				category = #{category,jdbcType=VARCHAR},
+			</if>
+			<if test="locationname != null">
+				locationName = #{locationname,jdbcType=VARCHAR},
+			</if>
+			<if test="longtitude != null">
+				longtitude = #{longtitude,jdbcType=DOUBLE},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="starttime != null">
+				startTime = #{starttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="eventinterval != null">
+				eventInterval = #{eventinterval,jdbcType=INTEGER},
+			</if>
+			<if test="eventcount != null">
+				eventCount = #{eventcount,jdbcType=INTEGER},
+			</if>
+			<if test="doneornot != null">
+				doneOrNot = #{doneornot,jdbcType=INTEGER},
+			</if>
+		</set>
+		where eventId = #{eventid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="mobile_project.bean.Event">
+		update event
+		set title = #{title,jdbcType=VARCHAR},
+		category = #{category,jdbcType=VARCHAR},
+		locationName = #{locationname,jdbcType=VARCHAR},
+		longtitude = #{longtitude,jdbcType=DOUBLE},
+		latitude = #{latitude,jdbcType=DOUBLE},
+		startTime = #{starttime,jdbcType=TIMESTAMP},
+		eventInterval = #{eventinterval,jdbcType=INTEGER},
+		eventCount = #{eventcount,jdbcType=INTEGER},
+		doneOrNot = #{doneornot,jdbcType=INTEGER}
+		where eventId = #{eventid,jdbcType=INTEGER}
+	</update>
 </mapper>

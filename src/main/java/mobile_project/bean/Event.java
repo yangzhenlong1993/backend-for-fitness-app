@@ -2,84 +2,107 @@ package mobile_project.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Event {
-    private Integer eventid;
+	private Integer eventid;
 
-    private String title;
+	private String title;
 
-    private Double longtitude;
+	private String category;
 
-    private Double latitude;
+	private String locationname;
 
-    private Date starttime;
+	private Double longtitude;
 
-    private Date endtime;
+	private Double latitude;
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+10")
+	private Date starttime;
 
-    private Integer interval;
+	private Integer eventinterval;
 
-    private String category;
+	private Integer eventcount;
 
-    public Integer getEventid() {
-        return eventid;
-    }
+	//1 代表完成，0代表未完成，任何新建的event状态都应为0
+	private Integer doneornot = 0;
 
-    public void setEventid(Integer eventid) {
-        this.eventid = eventid;
-    }
+	public Integer getEventid() {
+		return eventid;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setEventid(Integer eventid) {
+		this.eventid = eventid;
+	}
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public Double getLongtitude() {
-        return longtitude;
-    }
+	public void setTitle(String title) {
+		this.title = title == null ? null : title.trim();
+	}
 
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public Double getLatitude() {
-        return latitude;
-    }
+	public void setCategory(String category) {
+		this.category = category == null ? null : category.trim();
+	}
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
+	public String getLocationname() {
+		return locationname;
+	}
 
-    public Date getStarttime() {
-        return starttime;
-    }
+	public void setLocationname(String locationname) {
+		this.locationname = locationname == null ? null : locationname.trim();
+	}
 
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
-    }
+	public Double getLongtitude() {
+		return longtitude;
+	}
 
-    public Date getEndtime() {
-        return endtime;
-    }
+	public void setLongtitude(Double longtitude) {
+		this.longtitude = longtitude;
+	}
 
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
-    }
+	public Double getLatitude() {
+		return latitude;
+	}
 
-    public Integer getInterval() {
-        return interval;
-    }
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
 
-    public void setInterval(Integer interval) {
-        this.interval = interval;
-    }
+	public Date getStarttime() {
+		return starttime;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
-    }
+	public Integer getEventinterval() {
+		return eventinterval;
+	}
+
+	public void setEventinterval(Integer eventinterval) {
+		this.eventinterval = eventinterval;
+	}
+
+	public Integer getEventcount() {
+		return eventcount;
+	}
+
+	public void setEventcount(Integer eventcount) {
+		this.eventcount = eventcount;
+	}
+
+	public Integer getDoneornot() {
+		return doneornot;
+	}
+
+	public void setDoneornot(Integer doneornot) {
+		this.doneornot = doneornot;
+	}
 }

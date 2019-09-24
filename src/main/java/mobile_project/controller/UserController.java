@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import mobile_project.bean.Msg;
@@ -31,16 +30,21 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = LOG_IN, method = RequestMethod.GET)
+	@RequestMapping(value = LOG_IN, method = RequestMethod.POST)
 	@ResponseBody
-	public Msg logInCheck(@RequestParam(value = "username") String username) {
-		User result = userService.getUser(username);
-		if (result != null) {
-			return Msg.prepare(Msg.SELECT_SUCCESS, LOG_IN).add("user_info", result);
-		} else {
-			return Msg.prepare(Msg.SELECT_FAIL, LOG_IN);
+	public Msg logInCheck(@RequestBody Msg msg) {
+		User user = msg.getUserInfo();
+		String username = user.getUsername();
+		String password = user.getPassword();
+		if(username ==null ||password==null) {
+			Msg back = new Msg();
+			back.setCode(Msg.SELECT_FAIL);
+			return back;
 		}
-
+		System.out.println(username+" "+password);
+		Msg result = userService.checkUser(username, password);
+		result.setOperation(LOG_IN);
+		return result;
 	}
 
 	/**
@@ -48,12 +52,15 @@ public class UserController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = SIGN_UP, method = RequestMethod.PUT)
+	@RequestMapping(value = SIGN_UP, method = RequestMethod.POST)
 	@ResponseBody
-	public Msg signUpCheck(@RequestBody User user) {
-		int result = userService.insertUser(user);
-
-		return Msg.prepare(result, SIGN_UP);
+	public Msg signUpCheck(@RequestBody Msg msg) {
+		int result = userService.insertUser( msg.getUserInfo());
+		Msg back = new Msg();
+		back.setCode(result);
+		back.setOperation("signup");
+	
+		return back;
 
 	}
 }

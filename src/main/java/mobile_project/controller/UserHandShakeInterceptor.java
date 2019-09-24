@@ -26,9 +26,10 @@ public class UserHandShakeInterceptor implements HandshakeInterceptor {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 
 			// mark user
-			String uid = servletRequest.getServletRequest().getParameter("uid");
-			if (uid != null) {
-				attributes.put("WEBSOCKET_USER_ID", uid);
+			int uid = -1;
+			uid = Integer.parseInt(servletRequest.getServletRequest().getParameter("uid"));
+			if (uid != -1) {
+				attributes.put(WebSocketConfig.UID, uid);
 				// map相当于处理器中的websession
 			} else {
 				System.out.println("user标识符为空");
